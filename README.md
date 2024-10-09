@@ -41,14 +41,13 @@ This project is a RESTful API built with Flask and Flask-SQLAlchemy. It tracks s
    git clone  https://github.com/Marcos-tech003/SuperHeroes-codechallenge
    cd SuperHeroes-codechallenge
 
-
 python3 -m venv venv
+
 source venv/bin/activate  # For Linux/macOS
-# or
+
 venv\Scripts\activate     # For Windows
 
 pip install -r requirements.txt
-
 
 flask db init
 flask db migrate
