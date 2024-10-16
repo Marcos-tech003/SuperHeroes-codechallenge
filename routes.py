@@ -1,8 +1,5 @@
 from flask import Blueprint, jsonify, request
-from models import db
-from models.hero import Hero
-from models.power import Power
-from models.heropower import HeroPower
+from models import db, Hero, Power, HeroPower
 
 routes = Blueprint('routes', __name__)
 
@@ -47,25 +44,5 @@ def update_power(id):
         power.description = data['description']
         db.session.commit()
         return jsonify(power.to_dict()), 200
-    except ValueError as e:
-        return jsonify({'errors': [str(e)]}), 400
-
-# POST /hero_powers
-@routes.route('/hero_powers', methods=['POST'])
-def create_hero_power():
-    try:
-        data = request.get_json()
-        HeroPower.validate_strength(data['strength'])
-        
-        hero_power = HeroPower(
-            strength=data['strength'],
-            hero_id=data['hero_id'],
-            power_id=data['power_id']
-        )
-        
-        db.session.add(hero_power)
-        db.session.commit()
-        
-        return jsonify(hero_power.to_dict()), 201
     except ValueError as e:
         return jsonify({'errors': [str(e)]}), 400
